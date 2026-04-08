@@ -1,0 +1,74 @@
+[
+  {
+    "forecast_month": "2018-02-01",
+    "predicted_cost": 871014.7989751421,
+    "lower_bound": 716027.2298121809,
+    "upper_bound": 1027898.936801468
+  },
+  {
+    "forecast_month": "2018-03-01",
+    "predicted_cost": 920803.7803268242,
+    "lower_bound": 764744.4758165799,
+    "upper_bound": 1080533.731270674
+  },
+  {
+    "forecast_month": "2018-04-01",
+    "predicted_cost": 900250.1855201863,
+    "lower_bound": 726609.8480365422,
+    "upper_bound": 1053528.0659236982
+  },
+  {
+    "forecast_month": "2018-05-01",
+    "predicted_cost": 950238.9570662765,
+    "lower_bound": 792699.5911107258,
+    "upper_bound": 1111405.7046380998
+  },
+  {
+    "forecast_month": "2018-06-01",
+    "predicted_cost": 914412.3356475735,
+    "lower_bound": 753669.0538757703,
+    "upper_bound": 1074486.646607563
+  },
+  {
+    "forecast_month": "2018-07-01",
+    "predicted_cost": 949935.6657625707,
+    "lower_bound": 786894.499268153,
+    "upper_bound": 1104506.1809720395
+  },
+  {
+    "forecast_month": "2018-08-01",
+    "predicted_cost": 942857.4817829425,
+    "lower_bound": 789378.7505709578,
+    "upper_bound": 1110353.1189633391
+  },
+  {
+    "forecast_month": "2018-09-01",
+    "predicted_cost": 934424.1137829125,
+    "lower_bound": 765606.4026955852,
+    "upper_bound": 1103813.0383472606
+  },
+  {
+    "forecast_month": "2018-10-01",
+    "predicted_cost": 931032.1681076792,
+    "lower_bound": 766245.9364116048,
+    "upper_bound": 1095013.5253933724
+  },
+  {
+    "forecast_month": "2018-11-01",
+    "predicted_cost": 784743.4242285845,
+    "lower_bound": 609907.775913221,
+    "upper_bound": 951255.94399575
+  },
+  {
+    "forecast_month": "2018-12-01",
+    "predicted_cost": 761000.8186180249,
+    "lower_bound": 601729.7863821129,
+    "upper_bound": 933590.4603437769
+  },
+  {
+    "forecast_month": "2019-01-01",
+    "predicted_cost": 739740.3919521638,
+    "lower_bound": 574066.4655006076,
+    "upper_bound": 901830.8562584696
+  }
+]

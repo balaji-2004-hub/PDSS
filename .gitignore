@@ -1,0 +1,16 @@
+node_modules/
+.next/
+
+venv/
+__pycache__/
+
+*.csv
+*.dll
+backend/data/
+
+.env*
+dist/
+build/
+
+.vscode/
+.idea/

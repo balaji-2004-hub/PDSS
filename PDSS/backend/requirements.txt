@@ -1,0 +1,15 @@
+﻿fastapi==0.115.8
+uvicorn==0.34.0
+sqlalchemy==2.0.38
+pydantic==2.10.6
+pandas==2.2.3
+numpy==1.26.4
+scikit-learn==1.6.1
+xgboost==2.1.4
+lightgbm==4.5.0
+prophet==1.1.6
+shap==0.46.0
+optuna==4.2.0
+matplotlib==3.10.0
+kaggle==1.8.4
+python-multipart==0.0.20

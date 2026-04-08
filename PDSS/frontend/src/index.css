@@ -1,0 +1,38 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0f172a;
+  background: radial-gradient(circle at top left, #dbeafe 0%, #f8fafc 45%, #f1f5f9 100%);
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.card-surface {
+  @apply rounded-2xl bg-white/90 shadow-soft backdrop-blur;
+}
+
+@keyframes riseIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: riseIn 0.5s ease forwards;
+}
