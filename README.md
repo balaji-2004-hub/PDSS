@@ -1,183 +1,121 @@
-# TimeBanking System
+Predictive Decision Support System (PDSS)
+PDSS is a full-stack vendor-risk and supply-chain continuity application. The backend exposes FastAPI endpoints for vendor data, delay/risk prediction, forecasting, and vendor recommendations. The frontend is a React + Vite dashboard.
 
-A full-stack TimeBanking application built with **Next.js 15, React 19, TypeScript, and Tailwind CSS**.
-
-The repository is intentionally split into two applications:
-
-- `frontend/` — user interface, running on **http://localhost:4028**
-- `backend/` — API and local JSON persistence, running on **http://localhost:4029**
-
-## Features
-
-- User registration and login
-- Member profiles and settings
-- Service listings (offers and requests)
-- Time-credit earning, spending, and exchange
-- Member messaging
-- Reviews and ratings
-- Admin dashboard, analytics, members, reviews, and disputes
-- Responsive Tailwind UI
-- Local JSON database for development
-
-## Requirements
-
-- Node.js 18.18+ (Node.js 20 LTS or newer recommended)
-- npm 9+
-
-Check your versions:
-
-```bash
-node -v
-npm -v
-```
-
-## Project structure
-
-```text
-Timebanking_System-main/
+Project structure
+PDSS/
 ├── backend/
-│   ├── src/app/api/       # API routes
-│   ├── src/lib/           # server-side data/persistence logic
-│   ├── package.json
-│   └── .env.example
+│   ├── app/
+│   ├── data/raw/
+│   ├── models/
+│   ├── supply_chain.db
+│   └── requirements.txt
 ├── frontend/
-│   ├── src/app/           # pages and UI
-│   ├── src/lib/           # API client and shared state
+│   ├── src/
 │   ├── package.json
-│   └── .env.example
+│   └── vite.config.js
+├── .gitignore
 └── README.md
-```
 
-## 1. Start the backend
+Prerequisites
+Python 3.10 or newer
+Node.js 18 or newer
+npm
+The repository already contains trained model artifacts and a populated SQLite database, so normal startup does not require Kaggle credentials or retraining.
 
-Open Terminal 1:
+1. Start the backend
+Open a terminal in the PDSS folder.
 
-```bash
+Windows PowerShell
 cd backend
-npm install
-npm run dev
-```
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+cd ..
+python backend/app/main.py
 
-Backend:
+If PowerShell blocks activation, use:
 
-```text
-http://localhost:4029
-```
+.venv\Scripts\python.exe -m pip install -r backend/requirements.txt
+..\.venv\Scripts\python.exe backend/app/main.py
 
-The development data file is created automatically at:
+The API runs at:
 
-```text
-backend/.timebank/db.json
-```
+http://localhost:8000
+Swagger UI: http://localhost:8000/docs
+macOS/Linux
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cd ..
+python backend/app/main.py
 
-Do not commit `.timebank/` to Git.
+2. Start the frontend
+Open a second terminal in the PDSS folder:
 
-## 2. Start the frontend
-
-Open Terminal 2:
-
-```bash
 cd frontend
 npm install
-```
-
-Create `frontend/.env.local`:
-
-```env
-NEXT_PUBLIC_API_BASE_URL=http://localhost:4029
-```
-
-Then start the frontend:
-
-```bash
 npm run dev
-```
 
-Frontend:
+Vite normally starts at:
 
-```text
-http://localhost:4028
-```
+http://localhost:5173
+The frontend reads the backend URL from VITE_API_BASE_URL. If it is not set, it defaults to http://localhost:8000.
 
-## 3. Test the application
+For a different backend URL, create frontend/.env:
 
-Open:
+VITE_API_BASE_URL=http://localhost:8000
 
-```text
-http://localhost:4028
-```
+3. Verify the application
+Start the backend and open /docs.
+Start the frontend and open the Vite URL.
+Confirm the dashboard loads vendors and model metrics.
+Test Vendor Comparison, Risk Heatmap, Forecast, and Scenario Simulator.
+Model retraining
+Retraining is intentionally not performed automatically during API startup. This prevents every restart from downloading datasets and retraining models.
 
-Register a test user, sign in, and verify profile, services, credits, messages, reviews, and admin functionality as applicable.
+If you explicitly want to retrain, configure your Kaggle credentials outside Git and run:
 
-## Useful commands
+Windows PowerShell
+$env:PDSS_RUN_PIPELINE="1"
+python backend/app/main.py
 
-### Frontend
+macOS/Linux
+PDSS_RUN_PIPELINE=1 python backend/app/main.py
 
-```bash
-cd frontend
-npm run dev
-npm run type-check
-npm run build
-npm run start
-```
+Kaggle credentials should be stored in the normal user location (~/.kaggle/kaggle.json) and must not be committed to Git. If a credential has previously been committed or shared, revoke/rotate it in Kaggle before using the repository again.
 
-### Backend
+Common problems
+ModuleNotFoundError
+Activate the backend virtual environment and run:
 
-```bash
-cd backend
-npm run dev
-npm run type-check
-npm run build
-npm run start
-```
+pip install -r backend/requirements.txt
 
-## Troubleshooting
+vite is not recognized / vite: not found
+From frontend run:
 
-### `Cannot reach backend`
-
-Make sure the backend is running on port `4029` and that `frontend/.env.local` contains:
-
-```env
-NEXT_PUBLIC_API_BASE_URL=http://localhost:4029
-```
-
-Restart the frontend after changing `.env.local`.
-
-### Port already in use
-
-The configured ports are:
-
-- Frontend: `4028`
-- Backend: `4029`
-
-Stop the process using the port, or change the port in the corresponding `package.json` and update the frontend API URL accordingly.
-
-### Clean reinstall
-
-If dependencies become corrupted:
-
-```bash
-# Windows PowerShell
-Remove-Item -Recurse -Force node_modules,.next -ErrorAction SilentlyContinue
 npm install
-```
+npm run dev
 
-For the backend and frontend, run the cleanup inside each directory separately.
+Backend says model artifacts are missing
+The normal repository should contain the files under backend/models/. If they are missing, configure Kaggle credentials and explicitly run the training pipeline with PDSS_RUN_PIPELINE=1.
 
-## Important Git files
+Frontend cannot reach the API
+Confirm the backend is running on port 8000 and check frontend/.env:
 
+VITE_API_BASE_URL=http://localhost:8000
+
+Git safety
 Do not commit:
 
-```text
-node_modules/
-.next/
-.timebank/
-.env
-.env.local
-```
+kaggle.json
+.env files containing secrets
+Python virtual environments
+node_modules
+build output
+Before pushing:
 
-Only commit `.env.example` files containing safe development defaults.
-
-## Development note
-
-This project uses a file-backed JSON database for local development. It is suitable for a development/demo environment, not as a production multi-user database. For production deployment, use a proper database and configure authentication, CORS, secrets, and persistence accordingly.
+git status
+git add .
+git commit -m "Fix PDSS setup and startup"
+git push
